@@ -99,9 +99,15 @@ export default function UpdateDonation() {
 
 
                 }
+
+                else if (res?.response?.status === 500) {
+                    toast.error("Internal server error! \n Please try after some time\nWe are getting to many requests")
+                }
                 else {
                     toast.error("Donation updation failed")
                 }
+
+
             } catch (error) {
                 toast.error("Donation updation failed catch")
             }

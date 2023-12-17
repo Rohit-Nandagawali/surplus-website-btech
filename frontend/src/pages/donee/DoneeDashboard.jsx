@@ -16,8 +16,10 @@ export default function DoneeDashboard() {
 
             let res = await getAllDonations()
             // console.log(res);
-            setAllDoantions(res.data)
+            setAllDoantions(res?.data)
             toast.success("All Donations fetched successfully")
+
+
         }
         getDonations()
 
@@ -48,7 +50,7 @@ export default function DoneeDashboard() {
                 <div className="my-4 grid grid-cols-3 gap-6">
 
                     {
-                        allDonations.map((donation) => (
+                        allDonations?.map((donation) => (
                             <DonationCard key={donation.donationId}
                                 cardType={'donee'}
                                 donationName={donation.donationName} donationDescription={donation.donationDescription}

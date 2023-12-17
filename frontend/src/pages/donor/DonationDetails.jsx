@@ -35,9 +35,9 @@ export default function DonationDetails() {
             let res = await getSingleDonation(donationId)
             let feedback = await getFeedbackByDonation(donationId)
 
-            setDonationDetails(res.data)
+            setDonationDetails(res?.data)
             // toast.success(" Donation's details fetched successfully")
-            setFeedbacks(feedback.data)
+            setFeedbacks(feedback?.data)
             // console.log(feedbacks);
 
 
@@ -46,7 +46,7 @@ export default function DonationDetails() {
             setDoneeId(JSON.parse(donee)?.doneeId)
 
 
-            let donor = await getSingleDonor(res.data.donorId)
+            let donor = await getSingleDonor(res?.data?.donorId)
             const donorFromStorage = JSON.parse(localStorage.getItem('donor'))
 
             if (donorFromStorage?.donor?.donorId === res?.data?.donorId) {
@@ -58,7 +58,7 @@ export default function DonationDetails() {
             }
 
 
-            setDonorDetails(donor.data)
+            setDonorDetails(donor?.data)
             // console.log("donor", donorDetails);
         }
 
@@ -76,9 +76,15 @@ export default function DonationDetails() {
                 setTimeout(() => {
                     navigate("/donor/dashboard");
                 }, 2000);
-            } else {
+            }
+
+            else if (res?.response?.status === 500) {
+                toast.error("Internal server error! \n Please try after some time\nWe are getting to many requests")
+            }
+            else {
                 toast.error("Donation deletion failed")
             }
+
         } catch (error) {
             toast.error("Donation deletion failed", error);
         }
@@ -105,6 +111,10 @@ export default function DonationDetails() {
             }
             else {
                 toast.error("Feedback Creation failed")
+            }
+
+            if (res?.response?.status === 500) {
+                toast.error("Internal server error! \n Please try after some time\nWe are getting to many requests")
             }
 
         }

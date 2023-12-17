@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom'
 import MainButton from '../../components/utility/MainButton'
@@ -14,6 +14,14 @@ export default function DoneeLogin() {
     const [password, setPassword] = useState()
 
     const navigate = useNavigate()
+
+    const donor = localStorage.getItem('donee');
+    useEffect(() => {
+        if (donor) {
+            navigate("/donee/dashboard");
+        }
+
+    }, [])
 
 
     const handleDoneeLogin = async () => {
@@ -31,10 +39,13 @@ export default function DoneeLogin() {
                 if (res.status === 200) {
                     toast.success("Login sucessful")
 
-                    localStorage.setItem('donee', JSON.stringify(res.data));
+                    localStorage.setItem('donee', JSON.stringify(res?.data));
                     setTimeout(() => {
                         navigate("/donee/dashboard");
                     }, 2000);
+                }
+                else if (res?.response?.status === 500) {
+                    toast.error("Internal server error! \n Please try after some time\nWe are getting to many requests")
                 }
                 // console.log(res);
             } catch (error) {

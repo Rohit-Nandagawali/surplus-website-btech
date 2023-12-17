@@ -45,9 +45,14 @@ export default function NewDonation() {
 
 
                 }
+                else if (res?.response?.status === 500) {
+                    toast.error("Internal server error! \n Please try after some time\nWe are getting to many requests")
+                }
                 else {
                     toast.error("Donation creation failed")
                 }
+
+
             } catch (error) {
                 toast.error("Donation creation failed catchs")
             }

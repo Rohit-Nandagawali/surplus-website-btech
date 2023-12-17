@@ -69,9 +69,13 @@ export default function EditDoneeProfile({ togglePages, setTogglePages }) {
 
                     setTogglePages('viewProfile')
                 }
+                else if (res?.response?.status === 500) {
+                    toast.error("Internal server error! \n Please try after some time\nWe are getting too many requests")
+                }
                 else {
                     toast.error("Donee Profile updation failed")
                 }
+
             } catch (error) {
                 toast.error("Donee Profile updation failed ")
             }

@@ -43,13 +43,18 @@ export default function DoneeRegister() {
 
                     let res = await loginDonee(email, passwd)
 
-                    localStorage.setItem('donee', JSON.stringify(res.data));
+                    localStorage.setItem('donee', JSON.stringify(res?.data));
                     setTimeout(() => {
                         navigate("/donee/dashboard");
                     }, 2000);
 
+
                 }
-                console.log(res);
+
+                else if (res?.response?.status === 500) {
+                    toast.error("Internal server error! \n Please try after some time\nWe are getting to many requests")
+                }
+                // console.log(res);
 
             } catch (error) {
                 toast.error("Error while calling api" + error)

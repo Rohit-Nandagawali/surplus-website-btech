@@ -68,10 +68,14 @@ export default function DonorDetails() {
                     setReviewDescription('')
 
                 }
+                else if (res?.response?.status === 500) {
+                    toast.error("Internal server error! \n Please try after some time\nWe are getting to many requests")
+                }
 
                 else {
                     toast.error("Review Creation failed")
                 }
+
             }
             else {
                 toast.error("Rating must be between 1 to 5")

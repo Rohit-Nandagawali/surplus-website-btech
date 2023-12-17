@@ -20,7 +20,7 @@ export default function DonorDashboard() {
 
             let res = await getDonationsByDonor(donorId)
             // console.log(res);
-            setAllDonations(res.data)
+            setAllDonations(res?.data)
             toast.success("All Donations fetched successfully")
         }
         const donor = JSON.parse(localStorage.getItem('donor'))

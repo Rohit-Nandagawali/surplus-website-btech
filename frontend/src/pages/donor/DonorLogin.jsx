@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MainButton from '../../components/utility/MainButton'
 import CustomeInput from '../../components/utility/CustomeInput'
 import { Link, useNavigate } from 'react-router-dom'
@@ -14,6 +14,15 @@ export default function DonorLogin() {
 
     const navigate = useNavigate()
 
+
+    const donor = localStorage.getItem('donor');
+    useEffect(() => {
+        if (donor) {
+            navigate("/donor/dashboard");
+        }
+
+    }, [])
+
     const handleDonorLogin = async () => {
         // console.log(email, password);
         if (!email || !password) {
@@ -26,19 +35,24 @@ export default function DonorLogin() {
             try {
 
                 let res = await loginDonor(email, password)
+
                 if (res.status === 200) {
                     toast.success("Login sucessful")
                     // console.log(res.data)
-                    localStorage.setItem('donor', JSON.stringify(res.data));
+                    localStorage.setItem('donor', JSON.stringify(res?.data));
                     setTimeout(() => {
                         navigate("/donor/dashboard");
                     }, 2000);
 
                 }
-                else if (res.response.status === 401) {
+                else if (res?.response?.status === 401) {
                     toast.error("Invalid Credentials")
                 }
+                else if (res?.response?.status === 500) {
+                    toast.error("Internal server error! \n Please try after some time\nWe are getting to many requests")
+                }
             } catch (error) {
+                console.log(error);
                 toast.error("Login Failed")
             }
         }

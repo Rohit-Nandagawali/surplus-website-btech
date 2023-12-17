@@ -45,10 +45,14 @@ export default function DonorRegister() {
 
                     let res = await loginDonor(email, passwd)
 
-                    localStorage.setItem('donor', JSON.stringify(res.data));
+                    localStorage.setItem('donor', JSON.stringify(res?.data));
                     setTimeout(() => {
                         navigate("/donor/dashboard");
                     }, 2000);
+                }
+
+                else if (res?.response?.status === 500) {
+                    toast.error("Internal server error! \n Please try after some time\nWe are getting to many requests")
                 }
                 // console.log(res);
 

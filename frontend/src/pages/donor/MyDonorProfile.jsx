@@ -66,9 +66,9 @@ export default function MyDonorProfile() {
 
     const handleLogOut = () => {
         localStorage.removeItem('donor');
-        setTimeout(() => {
-            navigate("/donor_login");
-        }, 2000);
+        // setTimeout(() => {
+        navigate("/donor_login");
+        // }, 2000);
     }
 
     const handleEditProfile = () => {
@@ -120,7 +120,8 @@ export default function MyDonorProfile() {
 
                         <div className="my-20 mt-1">
                             <h1 className=' font-semibold text-2xl'>Reviews <span className='bg-mainColor
- px-2 rounded-full h-4 w-4 ml-2 text-white'>{reviews?.length}</span></h1>
+ px-2 rounded-full h-4 w-4 ml-2 text-white'>
+                                {reviews?.length ? reviews?.length : 0}</span></h1>
 
 
                             {

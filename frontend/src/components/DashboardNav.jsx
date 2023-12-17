@@ -11,8 +11,7 @@ export default function DashboardNav({ user }) {
     const [userType, setUserType] = useState()
     const [userId, setUserId] = useState()
 
-    useEffect(() => {
-
+    const setNavData = () => {
         if (user === 'donee') {
             const donee = localStorage.getItem('donee');
             setUserType('donee')
@@ -27,6 +26,14 @@ export default function DashboardNav({ user }) {
             // console.log("donor id", userId);
 
         }
+
+
+
+    }
+
+    useEffect(() => {
+
+        setNavData()
     }, [])
 
 
@@ -40,12 +47,21 @@ export default function DashboardNav({ user }) {
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{nameOfWebsite}</span>
                 </Link>
 
-                <Link to={`/${user}/dashboard/myprofile/${userId}`} className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                        <span className="sr-only">Open user menu</span>
-                        <img className="w-8 h-8 rounded-full" src="https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg" alt="avatar" />
-                    </button>
-                </Link>
+                <div className="">
+                    {
+                        userId &&
+                        <Link to={`/${user}/dashboard/myprofile/${userId}`} className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                            <button type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                                <span className="sr-only">Open user menu</span>
+                                <img className="w-8 h-8 rounded-full" src="https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg" alt="avatar" />
+                            </button>
+                        </Link>
+
+
+                    }
+
+                </div>
+
 
             </div>
         </nav>
