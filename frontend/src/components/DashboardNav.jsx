@@ -6,7 +6,7 @@ import Logo from '../assets/Logo'
 export default function DashboardNav({ user }) {
 
 
-    console.log('loging from nav', user);
+    // console.log('loging from nav', user);
 
     const [userType, setUserType] = useState()
     const [userId, setUserId] = useState()
