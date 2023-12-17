@@ -24,5 +24,6 @@ export const createFeedback = async (donationId, feedbackTitle, feedbackDescript
 
     } catch (error) {
         console.error('Feedback Creating failed:', error);
+        return error
     }
 }

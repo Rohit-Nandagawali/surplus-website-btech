@@ -58,9 +58,9 @@ export default function MyDoneeProfile() {
 
     const handleLogOut = () => {
         localStorage.removeItem('donee');
-        setTimeout(() => {
-            navigate("/donee_login");
-        }, 2000);
+        // setTimeout(() => {
+        navigate("/donee_login");
+        // }, 2000);
     }
 
     const handleEditProfile = () => {

@@ -97,9 +97,13 @@ export default function DonationDetails() {
 
         }
         else {
+
+            console.log(donationId, feedbackTitle, feedbackDescription, doneeId);
             const res = await createFeedback(donationId, feedbackTitle, feedbackDescription, doneeId)
 
-            if (res.status === 201) {
+
+
+            if (res?.status === 201) {
                 toast.success("Feedback added successfully")
 
                 let fetchFeedbacks = await getFeedbackByDonation(donationId)
@@ -109,13 +113,14 @@ export default function DonationDetails() {
                 setFeedbackDescription('')
 
             }
+            else if (res?.response?.status === 500) {
+                toast.error("Internal server error! \n Please try after some time\nWe are getting to many requests")
+            }
+
             else {
                 toast.error("Feedback Creation failed")
             }
 
-            if (res?.response?.status === 500) {
-                toast.error("Internal server error! \n Please try after some time\nWe are getting to many requests")
-            }
 
         }
     }
